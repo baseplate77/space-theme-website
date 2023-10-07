@@ -1,113 +1,286 @@
-import Image from 'next/image'
+"use client";
+import styles from "./page.module.css";
+import { useMousePostion } from "./hooks/userMousePostition";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
+import localFont from "next/font/local";
+import Image from "next/image";
+import { Dosis } from "next/font/google";
+const hillray = localFont({
+  src: [
+    {
+      path: "../fonts/hillray/Hillray Extrude.otf",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+});
+
+const dosis = Dosis({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export default function Home() {
+  const { x, y } = useMousePostion();
+  const animationControls = useAnimation();
+
+  const [isHoverred, setIsHoverred] = useState(false);
+  const size = isHoverred ? 400 : 20;
+  // console.log("hoverred :", isHoverred);
+
+  const animationSequence = async () => {
+    animationControls.start({
+      x: 100,
+      y: 100,
+      scale: 0.5,
+      transition: {
+        ease: "easeInOut",
+        duration: 1,
+        repeat: Infinity,
+        repeatType: "reverse",
+      },
+    });
+    animationControls.start({
+      rotate: 45,
+      scale: 1,
+      transition: {
+        ease: "easeInOut",
+        duration: 1,
+        repeat: Infinity,
+        repeatType: "reverse",
+      },
+    });
+  };
+
+  useEffect(() => {
+    // animationSequence();
+  }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main
+      className={`${styles.main} relative  overflow-hidden ${dosis.className}`}
+      style={{ backgroundColor: "white" }}
+    >
+      <nav className=" sticky top-0 flex gap-6 p-4">
+        <div className="font-medium ">NAYAN</div>
+        <div className="grow" />
+        <div className="font-medium ">NEWS</div>
+        <div className="font-medium ">OBSERVING</div>
+        <div className="font-medium ">RESOURCES</div>
+        <div className="font-medium ">COMMUNITY</div>
+        <div className="font-medium ">ABOUT US</div>
+      </nav>
+      <div
+        className={`${styles["bg-animated-image"]} absolute top-[25%] left-10 w-56 h-56`}
+        style={{ WebkitMaskSize: "230px" }}
+      >
+        <div className="bg-animation">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div id="stars4"></div>
+        </div>
+      </div>
+      <div
+        className={`${styles["bg-animated-image"]} absolute top-[10%] right-10 w-56 h-56 overflow-hidden`}
+        style={{ WebkitMaskSize: "230px" }}
+      >
+        <div className="bg-animation">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div id="stars4"></div>
+        </div>
+      </div>
+      <div
+        className={`${styles["bg-animated-image"]} absolute -bottom-[300px] -left-[200px] sm:w-[600px] sm:h-[600px] overflow-hidden`}
+        style={{ WebkitMaskSize: "605px" }}
+      >
+        <div className="bg-animation">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div id="stars4"></div>
+        </div>
+      </div>
+      <div
+        className={`${styles["bg-animated-image"]} absolute -bottom-[300px] -right-[250px] sm:w-[600px] sm:h-[600px] overflow-hidden`}
+        style={{ WebkitMaskSize: "605px" }}
+      >
+        <div className="bg-animation">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div id="stars4"></div>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+      <motion.div
+        // animate={animationControls}
+        className="absolute "
+        initial={{
+          opacity: 0.2,
+          scale: 0,
+          x: "10px",
+          y: "80px",
+          rotate: -65,
+        }}
+        animate={{
+          x: "350%",
+          scale: 1,
+          rotate: -10,
+          opacity: 1,
+        }}
+        transition={{
+          type: "tween",
+          ease: "backOut",
+          duration: 1.5,
+          delay: 0.3,
+        }}
+      >
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src={"/assets/saturn.png"}
+          width={300}
+          height={200}
+          alt="saturn"
+        />
+      </motion.div>
+
+      {/* telescope */}
+      <div className="absolute -bottom-20 right-[30%]">
+        <Image
+          src={"/assets/telescope2.png"}
+          width={250}
+          height={300}
+          alt="telescope"
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      {/* metoriod */}
+      <motion.div
+        className="absolute bottom-28 left-20"
+        initial={{ rotate: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{
+          type: "linear",
+          // ease: "",
+          duration: 10,
+          repeat: Infinity,
+        }}
+      >
+        <Image
+          src={"/assets/meteoriod.png"}
+          width={150}
+          height={150}
+          alt="meteoriod"
+        />
+      </motion.div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+      {/* UFO */}
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+      <motion.div
+        className="absolute top-32 "
+        initial={{
+          x: "-90%",
+          rotate: 0,
+        }}
+        animate={{
+          x: "90%",
+          rotate: -25,
+        }}
+        transition={{
+          type: "tween",
+          ease: "backIn",
+          duration: 2,
+        }}
+      >
+        <Image src={"/assets/ufo.png"} width={300} height={300} alt="UFO" />
+      </motion.div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      {/* astronout */}
+      <motion.div
+        className="z-20 absolute right-10"
+        initial={{
+          scale: 1,
+          rotate: -20,
+          y: 0,
+        }}
+        animate={{
+          scale: 0.8,
+          x: "10%",
+          y: "20%",
+        }}
+        transition={{
+          type: "tween",
+          ease: "linear",
+          duration: 2.5,
+          delay: 0.2,
+        }}
+      >
+        <Image
+          className="z-10 overflow-clip"
+          src={"/assets/astronaut.png"}
+          width={600}
+          height={600}
+          alt="Astronaut"
+        />
+      </motion.div>
+      <motion.div
+        className={`${styles.mask}`}
+        animate={{
+          WebkitMaskPosition: `${x - size / 2}px ${y - 56 - size / 2}px`,
+          WebkitMaskSize: `${size}px`,
+        }}
+        transition={{ type: "tween", ease: "backOut", duration: 0.4 }}
+      >
+        <div
+          className="z-10"
+          onMouseOver={() => setIsHoverred(true)}
+          onMouseLeave={(e) => setIsHoverred(false)}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+          <div className="text-white text-center w-max flex gap-6 flex-col items-center justify-center ">
+            <div className="font-medium text-6xl ">
+              Mystery: What came before <br /> the big bang?
+            </div>
+            <div className="text-lg">
+              Sprinkled with hand-drawn diagrams by Kinney, “An Infinity of
+              Worlds” introduces readers to the science of <br />
+              cosmic inflation and the evidence for it, as well as the theory’s
+              shortcomings. The book also delves into weird but wondrous <br />
+              consequences of cosmic inflation, like the idea, in a model of
+              eternal inflation, that our universe is one of a possibly infinite
+              number <br />
+              of universes that we’ll never be able to see.
+            </div>
+          </div>
+        </div>
+        <div className="bg-animation overflow-hidden">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div id="stars4"></div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className={`${styles.body} `}
+        onMouseOver={() => console.log("Mouse Ente")}
+      >
+        <div className="flex flex-col gap-4 text-center items-start justify-center w-max  ">
+          <p className={`font-bold text-8xl ${hillray.className}`}>
+            EXPLORE
+            <br />
+            THE SPACE
           </p>
-        </a>
-      </div>
+          <p className="text-base">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+            <br /> Lorem Ipsum has been the industry's standard dummy text ever
+            since the 1500s.
+          </p>
+          <p className="text-base font-medium"> Nayan Jagtap</p>
+        </div>
+      </motion.div>
     </main>
-  )
+  );
 }

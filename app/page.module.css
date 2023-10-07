@@ -1,0 +1,59 @@
+.main {
+  height: 100vh;
+}
+
+.main .mask,
+.main .body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: Center;
+  justify-content: center;
+  color: #000000;
+}
+
+.main p {
+  width: 100%;
+}
+.main .mask {
+  position: absolute;
+  background-size: cover;
+  mask-image: url("../public/mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: 40px;
+  background: black;
+  /* animation: bgAnimation 8s ease-in-out infinite 1s; */
+}
+
+.bg-animated-image {
+  /* background: #dedede;
+  padding: 0.5rem !important; */
+  /* background: #000; */
+  /* margin: -0.5rem !important; */
+
+  background-size: cover;
+
+  /* width: 40px;
+  height: 40px; */
+  mask-image: url("../public/rect-mask.svg");
+  /* mask-composite: exclude; */
+  mask-repeat: no-repeat;
+  mask-size: 45px;
+  mask-position: center;
+  /* mask-position: left; */
+  background: black;
+  animation: bgAnimation 8s ease-in-out infinite 1s;
+}
+@keyframes bgAnimation {
+  0% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+
+  50% {
+    border-radius: 40% 60% 70% 40%/50% 60% 50% 60%;
+  }
+
+  100% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+}
