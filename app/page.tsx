@@ -33,16 +33,17 @@ export default function Home() {
       style={{ backgroundColor: "white" }}
     >
       <motion.div
-        className="absolute top-0 bottom-0 left-0 right-0 z-30 w-screen h-screen  bg-white"
+        className="absolute top-0 bottom-0 left-0 right-0 z-30   bg-white"
         initial={{ opacity: 1 }}
         animate={{
           opacity: 0,
+          display: "none",
         }}
         transition={{
           type: "tween",
           ease: "backOut",
           duration: 1,
-          delay: 0,
+          delay: 0.2,
         }}
       >
         <div className="flex items-center justify-center h-full font-medium text-2xl">
