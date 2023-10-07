@@ -23,44 +23,32 @@ const dosis = Dosis({
 
 export default function Home() {
   const { x, y } = useMousePostion();
-  const animationControls = useAnimation();
-
   const [isHoverred, setIsHoverred] = useState(false);
   const size = isHoverred ? 400 : 20;
   // console.log("hoverred :", isHoverred);
 
-  const animationSequence = async () => {
-    animationControls.start({
-      x: 100,
-      y: 100,
-      scale: 0.5,
-      transition: {
-        ease: "easeInOut",
-        duration: 1,
-        repeat: Infinity,
-        repeatType: "reverse",
-      },
-    });
-    animationControls.start({
-      rotate: 45,
-      scale: 1,
-      transition: {
-        ease: "easeInOut",
-        duration: 1,
-        repeat: Infinity,
-        repeatType: "reverse",
-      },
-    });
-  };
-
-  useEffect(() => {
-    // animationSequence();
-  }, []);
   return (
     <main
       className={`${styles.main} relative  overflow-hidden ${dosis.className}`}
       style={{ backgroundColor: "white" }}
     >
+      <motion.div
+        className="absolute top-0 bottom-0 left-0 right-0 z-30 w-screen h-screen  bg-white"
+        initial={{ opacity: 1 }}
+        animate={{
+          opacity: 0,
+        }}
+        transition={{
+          type: "tween",
+          ease: "backOut",
+          duration: 1,
+          delay: 0,
+        }}
+      >
+        <div className="flex items-center justify-center h-full font-medium text-2xl">
+          Nayan Jagtap
+        </div>
+      </motion.div>
       <nav className=" sticky top-0 flex gap-6 p-4">
         <div className="font-medium ">NAYAN</div>
         <div className="grow" />
