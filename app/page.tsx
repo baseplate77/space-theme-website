@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 import Image from "next/image";
 import { Dosis } from "next/font/google";
 import useWindowDimensions from "./hooks/useWindowDimension";
+import Link from "next/link";
 const hillray = localFont({
   src: [
     {
@@ -52,12 +53,17 @@ export default function Home() {
         transition={{
           type: "tween",
           ease: "backOut",
-          duration: 0.8,
+          duration: 1,
           delay: 0.2,
         }}
       >
         <div className="flex items-center justify-center h-full font-medium text-2xl">
-          Nayan Jagtap
+          <Image
+            src={"/assets/Craftsmen.svg"}
+            width={100}
+            height={60}
+            alt="craftsmen agency"
+          />
         </div>
       </motion.div>
       <nav className=" sticky top-0 flex  p-4 items-center justify-center">
@@ -290,6 +296,34 @@ export default function Home() {
           </p>
           <p className="text-base font-medium"> Nayan Jagtap</p>
         </div>
+
+        <div className="absolute flex gap-2  z-30 bottom-4 left-4 ">
+          <div className="bg-white rounded-lg p-4">
+            {" "}
+            Design from <span className="font-bold">Dannniel</span>
+          </div>
+          <div className="bg-white rounded-lg p-4">
+            {" "}
+            Developed by{" "}
+            <Link
+              href={"https://twitter.com/NayanJagtap21"}
+              target="_blank"
+              className="font-bold underline"
+            >
+              Nayan
+            </Link>
+          </div>
+        </div>
+
+        <Link
+          href={"https://www.craftsmen.agency/"}
+          target="_blank"
+          className="absolute flex gap-2  z-30 bottom-4 right-4 "
+        >
+          <div className="bg-white rounded-lg p-4">
+            Contact us for <span className="font-bold underline">Work</span>
+          </div>
+        </Link>
       </motion.div>
     </main>
   );
