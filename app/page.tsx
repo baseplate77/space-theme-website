@@ -31,8 +31,6 @@ export default function Home() {
   const size = isHoverred ? 400 : 20;
   // console.log("hoverred :", isHoverred);
 
-  console.log("width :", width, "height :", height);
-
   return (
     <main
       className={`${styles.main} relative  overflow-hidden ${dosis.className}`}
@@ -55,14 +53,14 @@ export default function Home() {
           type: "tween",
           ease: "backOut",
           duration: 1,
-          delay: 0.2,
+          delay: 0.8,
         }}
       >
         <div className="flex items-center justify-center h-full font-medium text-2xl">
           <Image
             src={"/assets/Craftsmen.svg"}
-            width={100}
-            height={60}
+            width={120}
+            height={80}
             alt="craftsmen agency"
           />
         </div>
@@ -148,7 +146,7 @@ export default function Home() {
           type: "tween",
           ease: "backOut",
           duration: 1.5,
-          delay: 0.3,
+          delay: 0.8,
         }}
       >
         <Image
@@ -209,6 +207,7 @@ export default function Home() {
           type: "tween",
           ease: "backIn",
           duration: 2,
+          delay: 0.8,
         }}
       >
         <Image src={"/assets/ufo.png"} width={300} height={300} alt="UFO" />
@@ -231,7 +230,7 @@ export default function Home() {
           type: "tween",
           ease: "linear",
           duration: 2.5,
-          delay: 0.2,
+          delay: 0.8,
         }}
       >
         <Image
