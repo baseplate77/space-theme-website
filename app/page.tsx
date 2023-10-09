@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import Image from "next/image";
 import { Dosis } from "next/font/google";
+import useWindowDimensions from "./hooks/useWindowDimension";
 const hillray = localFont({
   src: [
     {
@@ -24,8 +25,12 @@ const dosis = Dosis({
 export default function Home() {
   const { x, y } = useMousePostion();
   const [isHoverred, setIsHoverred] = useState(false);
+  const [animationEnded, setAnimationEnded] = useState(false);
+  const { width, height } = useWindowDimensions();
   const size = isHoverred ? 400 : 20;
   // console.log("hoverred :", isHoverred);
+
+  console.log("width :", width, "height :", height);
 
   return (
     <main
@@ -33,16 +38,21 @@ export default function Home() {
       style={{ backgroundColor: "white" }}
     >
       <motion.div
-        className="absolute top-0 bottom-0 left-0 right-0 z-30   bg-white"
-        initial={{ opacity: 1 }}
+        className={`absolute top-0 bottom-0 left-0 right-0 z-30 bg-white ${
+          animationEnded ? "hidden" : ""
+        }`}
+        initial={{ opacity: 1, scale: 1 }}
         animate={{
           opacity: 0,
-          display: "none",
+          scale: 10,
+        }}
+        onAnimationEnd={() => {
+          setAnimationEnded(true);
         }}
         transition={{
           type: "tween",
           ease: "backOut",
-          duration: 1,
+          duration: 0.8,
           delay: 0.2,
         }}
       >
@@ -50,17 +60,23 @@ export default function Home() {
           Nayan Jagtap
         </div>
       </motion.div>
-      <nav className=" sticky top-0 flex gap-6 p-4">
+      <nav className=" sticky top-0 flex  p-4 items-center justify-center">
         <div className="font-medium ">NAYAN</div>
         <div className="grow" />
-        <div className="font-medium ">NEWS</div>
-        <div className="font-medium ">OBSERVING</div>
-        <div className="font-medium ">RESOURCES</div>
-        <div className="font-medium ">COMMUNITY</div>
-        <div className="font-medium ">ABOUT US</div>
+        <div className="block sm:hidden">
+          <Image src={"/assets/menu.svg"} width={40} height={30} alt="menu" />
+        </div>
+        <div className="hidden gap-6 sm:flex">
+          <div className="font-medium ">NEWS</div>
+          <div className="font-medium ">OBSERVING</div>
+          <div className="font-medium ">RESOURCES</div>
+          <div className="font-medium ">COMMUNITY</div>
+          <div className="font-medium ">ABOUT US</div>
+        </div>
       </nav>
+
       <div
-        className={`${styles["bg-animated-image"]} absolute top-[25%] left-10 w-56 h-56`}
+        className={`${styles["bg-animated-image"]} hidden sm:block  absolute top-[25%] left-10 w-56 h-56`}
         style={{ WebkitMaskSize: "230px" }}
       >
         <div className="bg-animation">
@@ -70,6 +86,7 @@ export default function Home() {
           <div id="stars4"></div>
         </div>
       </div>
+
       <div
         className={`${styles["bg-animated-image"]} absolute top-[10%] right-10 w-56 h-56 overflow-hidden`}
         style={{ WebkitMaskSize: "230px" }}
@@ -82,8 +99,8 @@ export default function Home() {
         </div>
       </div>
       <div
-        className={`${styles["bg-animated-image"]} absolute -bottom-[300px] -left-[200px] sm:w-[600px] sm:h-[600px] overflow-hidden`}
-        style={{ WebkitMaskSize: "605px" }}
+        className={`${styles["bg-animated-image"]} absolute -bottom-[100px] -left-[100px] w-[300px] h-[300px]  sm:w-[600px] sm:h-[600px] sm:-bottom-[300px] sm:-left-[200px] overflow-hidden`}
+        style={{ WebkitMaskSize: width! <= 640 ? "605px" : "605px" }}
       >
         <div className="bg-animation">
           <div id="stars"></div>
@@ -136,7 +153,7 @@ export default function Home() {
       </motion.div>
 
       {/* telescope */}
-      <div className="absolute -bottom-20 right-[30%]">
+      <div className="absolute -bottom-20 right-[30%] hidden sm:block ">
         <Image
           src={"/assets/telescope2.png"}
           width={250}
@@ -147,7 +164,7 @@ export default function Home() {
 
       {/* metoriod */}
       <motion.div
-        className="absolute bottom-28 left-20"
+        className="absolute bottom-28 left-20 hidden sm:block"
         initial={{ rotate: 0 }}
         animate={{ rotate: 360 }}
         transition={{
@@ -171,10 +188,14 @@ export default function Home() {
         className="absolute top-32 "
         initial={{
           x: "-90%",
+          y: `${height! * 0.15}px`,
+
           rotate: 0,
         }}
         animate={{
-          x: "90%",
+          x: `${width! <= 640 ? -width! * 0.2 : width! * 0.15}px`,
+          y: `${width! <= 640 ? height! * 0.05 : height! * 0}px`,
+          scale: `${width! <= 640 ? 0.7 : 1}`,
           rotate: -25,
         }}
         transition={{
@@ -195,9 +216,9 @@ export default function Home() {
           y: 0,
         }}
         animate={{
-          scale: 0.8,
-          x: "10%",
-          y: "20%",
+          scale: 0.9,
+          x: ` ${width! <= 640 ? width! * 0.3 : width! * 0.1}px`,
+          y: `${width! <= 640 ? height! * 0.5 : height! * 0.25}px`,
         }}
         transition={{
           type: "tween",
@@ -256,7 +277,7 @@ export default function Home() {
         onMouseOver={() => console.log("Mouse Ente")}
       >
         <div className="flex flex-col gap-4 text-center items-start justify-center w-max  ">
-          <p className={`font-bold text-8xl ${hillray.className}`}>
+          <p className={`font-bold text-6xl sm:text-8xl  ${hillray.className}`}>
             EXPLORE
             <br />
             THE SPACE
