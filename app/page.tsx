@@ -158,7 +158,7 @@ export default function Home() {
       </motion.div>
 
       {/* telescope */}
-      <div className="absolute -bottom-20 right-[30%] hidden sm:block ">
+      <div className="absolute -bottom-20 right-[30%] hidden  xl:block ">
         <Image
           src={"/assets/telescope2.png"}
           width={250}
@@ -297,7 +297,7 @@ export default function Home() {
           <p className="text-base font-medium"> Nayan Jagtap</p>
         </div>
 
-        <div className="absolute flex gap-2  z-30 bottom-4 left-4 ">
+        <div className="absolute sm:flex flex-col sm:flex-row gap-2 hidden  z-30 bottom-4 left-4 ">
           <div className="bg-white rounded-lg p-4">
             {" "}
             Design from <span className="font-bold">Dannniel</span>
