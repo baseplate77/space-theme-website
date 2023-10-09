@@ -47,8 +47,9 @@ export default function Home() {
           opacity: 0,
           scale: 10,
         }}
-        onAnimationEnd={() => {
+        onAnimationComplete={() => {
           setAnimationEnded(true);
+          console.log("Animate completed");
         }}
         transition={{
           type: "tween",
