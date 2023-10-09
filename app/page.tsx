@@ -169,7 +169,7 @@ export default function Home() {
 
       {/* metoriod */}
       <motion.div
-        className="absolute bottom-28 left-20 hidden sm:block"
+        className=" absolute bottom-28 left-20 hidden sm:block"
         initial={{ rotate: 0 }}
         animate={{ rotate: 360 }}
         transition={{
