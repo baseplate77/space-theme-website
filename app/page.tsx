@@ -229,7 +229,7 @@ export default function Home() {
         transition={{
           type: "tween",
           ease: "linear",
-          duration: 2.5,
+          duration: 3.5,
           delay: 0.8,
         }}
       >
